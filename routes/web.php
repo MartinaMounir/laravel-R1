@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controller\ExampleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,3 +56,18 @@ Route::prefix('training')->group(function (){
         return 'logistics page';
     });
 });
+
+//Route::fallback(function(){
+ //   return redirect('/');
+//});
+Route::get('cv', function () {
+    return view('cv');
+});
+Route::get('login', function () {
+    return view('login');
+});
+Route::post('receive', function () {
+    return 'Data Received';
+})->name('receive');
+
+Route::get('test1',[ExampleController::class,'test']);
