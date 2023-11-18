@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controller\ExampleController;
+use App\Http\Controller\CarsController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,3 +74,10 @@ Route::post('receive', function () {
 })->name('receive');
 
 Route::get('test1',[ExampleController::class,'test']);
+Route::get('addcar', function () {
+    return view('addcar');
+});
+Route::post('car', function () {
+    return view('car');
+})->name('addcars');
+Route::get('car',[CarsController::class,'add_car2']);
