@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\NewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controller\ExampleController;
-use App\Http\Controller\CarsController;
+use App\Http\Controller\CarController;
 
 
 /*
@@ -63,6 +64,7 @@ Route::prefix('training')->group(function (){
 //Route::fallback(function(){
  //   return redirect('/');
 //});
+//Route CV
 Route::get('cv', function () {
     return view('cv');
 });
@@ -73,11 +75,13 @@ Route::post('receive', function () {
     return 'Data Received';
 })->name('receive');
 
-Route::get('test1',[ExampleController::class,'test']);
+//Route::get('test1',[ExampleController::class,'test']);
+//Route Car
 Route::get('addcar', function () {
     return view('addcar');
 });
-Route::post('car', function () {
-    return view('car');
-})->name('addcars');
-Route::get('car',[CarsController::class,'add_car2']);
+Route::post('cardata',[\App\Http\Controllers\CarController::class,'store'])->name('addcars');
+
+//Route News
+Route::get('addnews',[NewController::class,'create'])->name('addnews');
+Route::post('newsdata',[NewController::class,'store'])->name('newsdata');
