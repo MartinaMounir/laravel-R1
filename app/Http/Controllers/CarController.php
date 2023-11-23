@@ -10,8 +10,9 @@ class CarController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {$cars=Car::get();
 
+return view('car',compact('cars'));
     }
 
     /**
@@ -53,8 +54,8 @@ class CarController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {$car=Car::findOrFail($id);
+         return view('editcar',compact('car'));
     }
 
     /**

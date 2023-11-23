@@ -11,8 +11,9 @@ class NewController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {$news=News::get();
+
+        return view('news',compact('news'));
     }
 
     /**
@@ -56,7 +57,8 @@ class NewController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $new=News::findOrFail($id);
+        return view('editnews',compact('new'));
     }
 
     /**

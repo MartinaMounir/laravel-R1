@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controller\ExampleController;
-use App\Http\Controller\CarController;
 
 
 /*
@@ -80,8 +80,14 @@ Route::post('receive', function () {
 Route::get('addcar', function () {
     return view('addcar');
 });
-Route::post('cardata',[\App\Http\Controllers\CarController::class,'store'])->name('addcars');
+Route::post('cardata',[CarController::class,'store'])->name('addcars');
+Route::get('car',[CarController::class,'index']);
+Route::get('editcar/{id}',[CarController::class,'edit'])->name('editcar');
+Route::put('updatecar/{id}',[CarController::class,'update'])->name('updatecar');
 
 //Route News
 Route::get('addnews',[NewController::class,'create'])->name('addnews');
 Route::post('newsdata',[NewController::class,'store'])->name('newsdata');
+Route::get('news',[NewController::class,'index']);
+Route::get('editnews/{id}',[NewController::class,'edit'])->name('editnews');
+Route::put('updatenews/{id}',[NewController::class,'update'])->name('updatenews');

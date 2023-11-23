@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>News List</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,28 +11,28 @@
 <body>
 
 <div class="container">
-    <h2>Car List</h2>
+    <h2>News List</h2>
     <table class="table table-hover">
         <thead>
         <tr>
             <th>id</th>
             <th>title</th>
-            <th>price</th>
-            <th>description</th>
+            <th>content</th>
+            <th>author</th>
             <th>Edit</th>
 
         </tr>
         </thead>
         <tbody>
-      @foreach($cars as $car) <tr>
-          <td>{{$car->id}}</td>
-            <td> {{$car->title}}</td>
-            <td>{{$car->price}}</td>
-          <td>{{$car->description}}</td>
-          <td> <a href="editcar/{{$car->id}}">Edit</a> </td>
+        @foreach($news as $new) <tr>
+            <td>{{$new->id}}</td>
+            <td>{{$new->title}}</td>
+            <td> {{$new->content}}</td>
+            <td>{{$new->author}}</td>
+            <td> <a href="editnews/{{$new->id}}">Edit</a> </td>
 
-      </tr>
-      @endforeach
+        </tr>
+        @endforeach
 
         </tbody>
     </table>
