@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class NewController extends Controller
 {
+    private $columns = ['Title','content','published','author'];
+
     /**
      * Display a listing of the resource.
      */
@@ -49,7 +51,8 @@ class NewController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $news = News::findOrFail($id);
+        return view('newsdetails',compact('news'));
     }
 
     /**
@@ -58,7 +61,7 @@ class NewController extends Controller
     public function edit(string $id)
     {
         $new=News::findOrFail($id);
-        return view('editnews',compact('new'));
+        return view('updatenews',compact('new'));
     }
 
     /**
@@ -66,7 +69,10 @@ class NewController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->only($this->columns);
+        $data['published'] = isset($data['published'])? 1:0;
+        News::where('id', $id)->update($data);
+        return 'Updated';
     }
 
     /**
@@ -74,6 +80,7 @@ class NewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        News::where('id', $id)->delete();
+        return 'deleted';
     }
 }

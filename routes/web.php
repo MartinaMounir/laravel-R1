@@ -84,10 +84,14 @@ Route::post('cardata',[CarController::class,'store'])->name('addcars');
 Route::get('car',[CarController::class,'index']);
 Route::get('editcar/{id}',[CarController::class,'edit'])->name('editcar');
 Route::put('updatecar/{id}',[CarController::class,'update'])->name('updatecar');
+Route::get('deletecar/{id}', [CarController::class, 'destroy']);
+Route::get('cardetails/{id}',[CarController::class,'show'])->name('newsdetails');
 
 //Route News
 Route::get('addnews',[NewController::class,'create'])->name('addnews');
 Route::post('newsdata',[NewController::class,'store'])->name('newsdata');
 Route::get('news',[NewController::class,'index']);
-Route::get('editnews/{id}',[NewController::class,'edit'])->name('editnews');
+Route::get('editnews/{id}',[NewController::class,'edit']);
 Route::put('updatenews/{id}',[NewController::class,'update'])->name('updatenews');
+Route::get('deletenews/{id}', [NewController::class, 'destroy']);
+Route::get('newsdetails/{id}',[NewController::class,'show'])->name('newsdetails');

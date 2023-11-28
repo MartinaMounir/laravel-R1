@@ -20,7 +20,8 @@
             <th>price</th>
             <th>description</th>
             <th>Edit</th>
-
+            <th>Show</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +31,8 @@
             <td>{{$car->price}}</td>
           <td>{{$car->description}}</td>
           <td> <a href="editcar/{{$car->id}}">Edit</a> </td>
+          <td><a href="cardetails/{{$car->id}}">Show</a></td>
+          <td><a href="deletecar/{{$car->id}}">Delete</a></td>
 
       </tr>
       @endforeach
