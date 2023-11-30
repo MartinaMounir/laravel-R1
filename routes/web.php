@@ -86,6 +86,9 @@ Route::get('editcar/{id}',[CarController::class,'edit'])->name('editcar');
 Route::put('updatecar/{id}',[CarController::class,'update'])->name('updatecar');
 Route::get('deletecar/{id}', [CarController::class, 'destroy']);
 Route::get('cardetails/{id}',[CarController::class,'show'])->name('newsdetails');
+Route::get('trashed', [CarController::class, 'trashed']);
+Route::get('restorecar/{id}', [CarController::class, 'restore']);
+Route::get('delete/{id}', [CarController::class, 'delete']);
 
 //Route News
 Route::get('addnews',[NewController::class,'create'])->name('addnews');
@@ -95,3 +98,6 @@ Route::get('editnews/{id}',[NewController::class,'edit']);
 Route::put('updatenews/{id}',[NewController::class,'update'])->name('updatenews');
 Route::get('deletenews/{id}', [NewController::class, 'destroy']);
 Route::get('newsdetails/{id}',[NewController::class,'show'])->name('newsdetails');
+Route::get('trashednews', [NewController::class, 'trashed']);
+Route::get('restorenews/{id}', [NewController::class, 'restore']);
+Route::get('delete/{id}', [NewController::class, 'delete']);

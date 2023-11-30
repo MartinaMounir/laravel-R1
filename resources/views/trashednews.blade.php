@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>News List</title>
+    <title>News trashed</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -10,10 +10,8 @@
 </head>
 <body>
 <div class="container">
-    <h2>News List</h2>
+    <h2>News trashed</h2>
     <h3><a href="addnews">Add</a></h3>
-    <h3><a href="trashednews">Show Trashed</a></h3>
-
     <table class="table table-hover">
         <thead>
         <tr>
@@ -21,8 +19,8 @@
             <th>title</th>
             <th>content</th>
             <th>author</th>
-            <th>Edit</th>
-            <th>Show</th>
+            <th>restore</th>
+
             <th>Delete</th>
         </tr>
         </thead>
@@ -32,9 +30,8 @@
             <td>{{$new->title}}</td>
             <td> {{$new->content}}</td>
             <td>{{$new->author}}</td>
-            <td> <a href="editnews/{{$new->id}}">Edit</a> </td>
-            <td><a href="newsdetails/{{$new->id}}">Show</a></td>
-            <td><a href="deletenews/{{$new->id}}">Delete</a></td>
+            <td> <a href="restorenews/{{$new->id}}">restore</a> </td>
+            <td> <a href="delete/{{$new->id}}">delete</a> </td>
         </tr>
         @endforeach
         </tbody>

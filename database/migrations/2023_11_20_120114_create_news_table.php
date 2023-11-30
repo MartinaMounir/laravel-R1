@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('content',250);
             $table->boolean('published');
             $table->text('author');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
