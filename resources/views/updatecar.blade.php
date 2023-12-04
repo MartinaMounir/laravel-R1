@@ -12,7 +12,7 @@
 
 <div class="container">
     <h2>Edit Car</h2>
-    <form action="{{ route ('updatecar',$car->id) }}" method="post">
+    <form action="{{ route ('updatecar',$car->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="form-group">
@@ -27,6 +27,26 @@
             <label for="description">description:</label>
             <input type="text" class="form-control" id="description" placeholder="Enter description" name="description" value="{{$car->description}}">
         </div>
+
+
+            <div class="form-group">
+                @if($car->image)
+                    <div class="form-floating mb-3">
+                        <img src="{{asset('../assets/images/'.$car->image)}}" width="200px">
+                    </div>
+                @endif
+
+                <label for="image">image:</label>
+                <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}">
+                @error('image')
+                <div class="alter alter-warning">
+                    {{ $message }}</div>
+                @enderror
+            </div>
+
+
+        </div>
+
         <div class="checkbox">
             <label><input type="checkbox" name="published"  @checked($car->published)>published</label>
         </div>

@@ -32,26 +32,19 @@ class NewController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request):RedirectResponse
-    {  $data=$request->only($this->columns);
-        $data['published']=isset($data['published'])?true:false;
-        $request->validate([
+    {$messages=[
+        'title.required'=>'Title is required',
+        'content.required'=> 'should be text',
+    ];
+        $data = $request->validate([
+            'author'=>'required|string',
             'title'=>'required|string',
             'content'=>'required|string'
-        ]);
+        ], $messages);
+        $data['published']=isset($data['published'])?true:false;
         News::create($data);
         return redirect('news');
-//        $News=new News();
-//        $News->title=$request->Title;
-//        $News->content=$request->contents;
-//        $News->author=$request->author;
-//        $published=$request->published;
-//        if(isset($request->published)){
-//            $News->published = true;
-//        }else{
-//            $News->published = false;
-//        }
-//        $News->save();
-//        return redirect('news');
+
     }
 
     /**

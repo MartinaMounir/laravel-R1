@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Traits\Common;
+use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use Illuminate\Support\Facades\Storage;
+
 class CarController extends Controller
-{    private $columns = ['title','price','description','published'];
+{   use Common;
+  private $columns = ['Title','price','description','published','image'];
 
     /**
      * Display a listing of the resource.
@@ -29,16 +33,23 @@ return view('car',compact('cars'));
      * Store a newly created resource in storage.
      */
     public function store(Request $request):RedirectResponse
-    {
-        $data=$request->only($this->columns);
-        $data['published']=isset($data['published'])?true:false;
-        $request->validate([
+    {$messages=[
+        'title.required'=>'Title is required',
+         'description.required'=> 'should be text',
+    ];
+        $data = $request->validate([
             'title'=>'required|string',
-            'description'=>'required|max:100|string'
-        ]);
+            'price'=>'integer',
+            'description'=>'required|max:100|string',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
+        $data['published']=isset($data['published'])?true:false;
+        $file=$request->image;
+        $path='assets/images';
+        $fileName=$this->uploadFile($file,$path);
+        $data['image']=$fileName;
         Car::create($data);
         return redirect('car');
-
     }
 
     /**
@@ -63,11 +74,21 @@ return view('car',compact('cars'));
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id):RedirectResponse
-    {
+    {$cars=Car::find($id);
         $data = $request->only($this->columns);
         $data['published'] = isset($data['published'])? 1:0;
+           if ($request->hasFile('image')){
+               if (Storage::disk('public')->exists('assets/images/' . $cars->image)) {
+                   Storage::disk('public')->delete('assets/images/' . $cars->image);
+               }
+            $image = $request->file('image');
+            $file_extension = $image->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+$image->move('assets/images/',$file_name);
+               $data['image'] = $file_name;
+        }
         Car::where('id', $id)->update($data);
-        return redirect('car');
+           return redirect('car');
     }
 
     /**

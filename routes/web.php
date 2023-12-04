@@ -3,7 +3,7 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\ExampleController;
+use App\Http\Controllers\ExampleController;
 
 
 /*
@@ -101,3 +101,6 @@ Route::get('newsdetails/{id}',[NewController::class,'show'])->name('newsdetails'
 Route::get('trashednews', [NewController::class, 'trashed']);
 Route::get('restorenews/{id}', [NewController::class, 'restore']);
 Route::get('delete/{id}', [NewController::class, 'delete']);
+//Upload
+Route::get('showupload', [ExampleController::class, 'showupload']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
