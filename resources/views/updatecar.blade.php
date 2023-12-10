@@ -17,41 +17,44 @@
         @method('put')
         <div class="form-group">
             <label for="Title">Title:</label>
-            <input type="text" class="form-control" id="Title" placeholder="Enter Title" name="Title" value="{{$car->title}}">
+            <input type="text" class="form-control" id="Title" placeholder="Enter Title" name="Title"
+                   value="{{$car->title}}">
+            @error('Title')
+            <div class="alter alter-warning">
+                {{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="price">price:</label>
-            <input type="number" class="form-control" id="price" placeholder="Enter price" name="price" value="{{$car->price}}">
+            <input type="number" class="form-control" id="price" placeholder="Enter price" name="price"
+                   value="{{$car->price}}">
         </div>
         <div class="form-group">
             <label for="description">description:</label>
-            <input type="text" class="form-control" id="description" placeholder="Enter description" name="description" value="{{$car->description}}">
+            <input type="text" class="form-control" id="description" placeholder="Enter description" name="description"
+                   value="{{$car->description}}">
+            @error('description')
+            <div class="alter alter-warning">
+                {{ $message }}</div>
+            @enderror
         </div>
-
-
-            <div class="form-group">
-                @if($car->image)
-                    <div class="form-floating mb-3">
-                        <img src="{{asset('../assets/images/'.$car->image)}}" width="200px">
-                    </div>
-                @endif
-
-                <label for="image">image:</label>
-                <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}">
-                @error('image')
-                <div class="alter alter-warning">
-                    {{ $message }}</div>
-                @enderror
+        <div class="form-group">
+            <div class="form-floating mb-3">
+                <img src="{{asset('assets/images/'.$car->image)}}" width="200px">
             </div>
-
-
+            <label for="image">image:</label>
+            <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}">
+            @error('image')
+            <div class="alter alter-warning">
+                {{ $message }}</div>
+            @enderror
         </div>
 
-        <div class="checkbox">
-            <label><input type="checkbox" name="published"  @checked($car->published)>published</label>
-        </div>
-        <button type="submit" class="btn btn-default">Update</button>
-    </form>
+<div class="checkbox">
+    <label><input type="checkbox" name="published" @checked($car->published)>published</label>
+</div>
+<button type="submit" class="btn btn-default">Update</button>
+</form>
 </div>
 
 </body>

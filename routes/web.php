@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewController;
+use App\Http\Controllers\PlaceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 
@@ -104,3 +105,10 @@ Route::get('delete/{id}', [NewController::class, 'delete']);
 //Upload
 Route::get('showupload', [ExampleController::class, 'showupload']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
+Route::get('place', [ExampleController::class, 'place']);
+Route::get('blog', [ExampleController::class, 'blog']);
+//Route place
+Route::get('addplace',[PlaceController::class,'create'])->name('addplace');
+Route::post('placedata',[PlaceController::class,'store'])->name('addplaces');
+Route::get('place',[PlaceController::class,'index']);
+Route::get('placelist',[PlaceController::class,'show'])->name('placelist');
