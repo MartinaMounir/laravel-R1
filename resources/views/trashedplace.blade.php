@@ -12,7 +12,7 @@
 <div class="container">
     <h2>place List</h2>
     <h3><a href="addplace">Add</a></h3>
-    <h3><a href="trashedplace">Show Trashed</a></h3>
+    <h3><a href="trashed">Show Trashed</a></h3>
 
     <table class="table table-hover">
         <thead>
@@ -22,8 +22,7 @@
             <th>short description</th>
             <th>to</th>
             <th>from</th>
-            <th>Edit</th>
-            <th>Show</th>
+            <th>restore</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -34,9 +33,8 @@
             <td>{{$place->shortdescription}}</td>
             <td>{{$place->from}}</td>
             <td>{{$place->to}}</td>
-            <td> <a href="editplace/{{$place->id}}">Edit</a> </td>
-            <td><a href="placedetails/{{$place->id}}">Show</a></td>
-            <td><a href="deleteplace/{{$place->id}}">Delete</a></td>
+            <td> <a href="restoreplace/{{$place->id}}">restore</a> </td>
+            <td> <a href="delete/{{$place->id}}">delete</a> </td>
 
         </tr>
         @endforeach
