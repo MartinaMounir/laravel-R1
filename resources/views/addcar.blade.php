@@ -12,7 +12,7 @@
 
 <div class="container">
   <h2>Vertical (basic) form</h2>
-  <form action="{{ route ('addcars') }}" method="post" enctype="multipart/form-data">
+  <form action="{{ route ('cardata') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
       <label for="Title">Title:</label>
@@ -41,6 +41,15 @@
           <div class="alter alter-warning">
               {{ $message }}</div>
           @enderror
+      </div>
+      <div class="form-group">
+          <label for="category_id">category:</label>
+          <select name="category_id" id="" class="form-control">
+              <option value="">select category</option>
+              @foreach($categories as $category)
+              <option value="{{$category->id}}">{{$category->categoryName}}</option>
+                  @endforeach
+          </select>
       </div>
     <div class="checkbox">
       <label><input type="checkbox" name="published"> published</label>

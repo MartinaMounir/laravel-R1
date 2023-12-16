@@ -78,10 +78,11 @@ Route::post('receive', function () {
 
 //Route::get('test1',[ExampleController::class,'test']);
 //Route Car
-Route::get('addcar', function () {
-    return view('addcar');
-});
-Route::post('cardata',[CarController::class,'store'])->name('addcars');
+//Route::get('addcar', function () {
+//    return view('addcar');
+//});
+Route::get('addcars',[CarController::class,'create'])->name('addcars');
+Route::post('cardata',[CarController::class,'store'])->name('cardata');
 Route::get('car',[CarController::class,'index']);
 Route::get('editcar/{id}',[CarController::class,'edit'])->name('editcar');
 Route::put('updatecar/{id}',[CarController::class,'update'])->name('updatecar');

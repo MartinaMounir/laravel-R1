@@ -49,7 +49,15 @@
                 {{ $message }}</div>
             @enderror
         </div>
-
+        <div class="form-group">
+            <label for="category_id">category:</label>
+            <select name="category_id" id="" class="form-control">
+                <option value="">select category</option>
+                @foreach($categories as $category)
+                    <option value="{{$category->id}}" @selected($car->category_id == $category->id)>{{$category->categoryName}}</option>
+                @endforeach
+            </select>
+        </div>
 <div class="checkbox">
     <label><input type="checkbox" name="published" @checked($car->published)>published</label>
 </div>

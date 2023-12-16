@@ -11,7 +11,7 @@
 <body>
 <div class="container">
     <h2>Car List</h2>
-    <h3><a href="addcar">Add</a></h3>
+    <h3><a href="addcars">Add</a></h3>
     <h3><a href="trashed">Show Trashed</a></h3>
 
     <table class="table table-hover">

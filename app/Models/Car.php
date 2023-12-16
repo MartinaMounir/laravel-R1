@@ -13,6 +13,13 @@ class Car extends Model
         'price',
         'description',
         'published',
-        'image'
+        'image',
+        'category_id'
     ];
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+    public function vendors(){
+        return $this->belongsToMany(Vendor::class);
+    }
 }

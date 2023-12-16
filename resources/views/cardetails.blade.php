@@ -11,5 +11,7 @@ cars title: {{  $cars->title }}
 cars price: {{  $cars->price }}
 <br>
 cars description: {{  $cars->description }}
+<br>
+category: {{  $cars->category->categoryName }}
 </body>
 </html>

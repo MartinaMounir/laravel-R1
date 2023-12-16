@@ -7,6 +7,7 @@ use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
@@ -21,7 +22,6 @@ class CarController extends Controller
     public function index()
     {
         $cars = Car::get();
-
         return view('car', compact('cars'));
     }
 
@@ -29,8 +29,9 @@ class CarController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {        return view('addcar');
-
+    {
+        $categories = Category::select('id', 'categoryName')->get();
+        return view('addcar', compact('categories'));
     }
 
     /**
@@ -44,6 +45,7 @@ class CarController extends Controller
             'price' => 'integer',
             'description' => 'required|max:100|string',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => ['required', 'int', 'exists:categories,id'],
         ], $messages);
         $data['published'] = isset($data['published']) ? true : false;
         $fileName = $this->uploadFile($request->image, 'assets/images');
@@ -66,9 +68,10 @@ class CarController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
+    {        $categories = Category::select('id', 'categoryName')->get();
+
         $car = Car::findOrFail($id);
-        return view('updatecar', compact('car'));
+        return view('updatecar', compact('car','categories'));
     }
 
     /**
@@ -83,13 +86,15 @@ class CarController extends Controller
             'price' => 'integer',
             'description' => 'required|max:100|string',
             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required', 'int', 'exists:categories,id',
+
         ], $messages);
         $data['published'] = isset($data['published']) ? 1 : 0;
         if ($request->hasFile('image')) {
             $imagePath = public_path('assets/images/' . $cars->image);
-                if (Car::exists($imagePath)) {
-                    unlink($imagePath);
-                }
+            if (Car::exists($imagePath)) {
+                unlink($imagePath);
+            }
             $fileName = $this->uploadFile($request->image, 'assets/images');
             $data['image'] = $fileName;
         }
