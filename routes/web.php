@@ -81,16 +81,18 @@ Route::post('receive', function () {
 //Route::get('addcar', function () {
 //    return view('addcar');
 //});
-Route::get('addcars',[CarController::class,'create'])->name('addcars');
-Route::post('cardata',[CarController::class,'store'])->name('cardata');
-Route::get('car',[CarController::class,'index']);
-Route::get('editcar/{id}',[CarController::class,'edit'])->name('editcar');
-Route::put('updatecar/{id}',[CarController::class,'update'])->name('updatecar');
-Route::get('deletecar/{id}', [CarController::class, 'destroy']);
-Route::get('cardetails/{id}',[CarController::class,'show'])->name('newsdetails');
-Route::get('trashed', [CarController::class, 'trashed']);
-Route::get('restorecar/{id}', [CarController::class, 'restore']);
-Route::get('delete/{id}', [CarController::class, 'delete']);
+Route::prefix('/')->as('cars.')->middleware(['auth', 'Admin'])->group(function () {
+    Route::get('addcars',[CarController::class,'create'])->name('addcars');
+    Route::post('cardata',[CarController::class,'store'])->name('cardata');
+    Route::get('car',[CarController::class,'index']);
+    Route::get('editcar/{id}',[CarController::class,'edit'])->name('editcar');
+    Route::put('updatecar/{id}',[CarController::class,'update'])->name('updatecar');
+    Route::get('deletecar/{id}', [CarController::class, 'destroy']);
+    Route::get('cardetails/{id}',[CarController::class,'show'])->name('newsdetails');
+    Route::get('trashed', [CarController::class, 'trashed']);
+    Route::get('restorecar/{id}', [CarController::class, 'restore']);
+    Route::get('delete/{id}', [CarController::class, 'delete']);
+});
 
 //Route News
 Route::get('addnews',[NewController::class,'create'])->name('addnews');
@@ -108,6 +110,8 @@ Route::get('showupload', [ExampleController::class, 'showupload']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 Route::get('place', [ExampleController::class, 'place']);
 Route::get('blog', [ExampleController::class, 'blog']);
+Route::get('session', [ExampleController::class, 'mySession']);
+
 //Route place
 Route::get('addplace',[PlaceController::class,'create'])->name('addplace');
 Route::post('placedata',[PlaceController::class,'store'])->name('addplaces');
@@ -119,3 +123,13 @@ Route::get('deleteplace/{id}', [PlaceController::class, 'destroy']);
 Route::get('trashedplace', [PlaceController::class, 'trashed']);
 Route::get('restoreplace/{id}', [PlaceController::class, 'restore']);
 Route::get('delete/{id}', [PlaceController::class, 'delete']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes(['verify'=>true]);

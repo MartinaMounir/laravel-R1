@@ -14,6 +14,15 @@ class ExampleController extends Controller
         return view("login");
     }
 
+    public function mySession()
+    {
+        session()->put('test', 'First Laravel session');
+//        session()->forget('test');
+
+        $data = session('test');
+        return view('session', compact('data'));
+    }
+
     public function showupload()
     {
         return view("upload");
@@ -28,14 +37,15 @@ class ExampleController extends Controller
     {
         return view("blog");
     }
-
-    public function upload(Request $request)
-    {
-//        $file_extension = $request->image->getClientOriginalExtension();
-//        $file_name = time() . '.' . $file_extension;
-//        $path = 'assets/images';
-//        $request->image->move($path, $file_name);
-        $fileName = $this->uploadFile($request->image, 'assets/images');
-        return $fileName;
-    }
 }
+//    public function upload(Request $request)
+//    {
+////        $file_extension = $request->image->getClientOriginalExtension();
+////        $file_name = time() . '.' . $file_extension;
+////        $path = '
+//}assets/images';
+////        $request->image->move($path, $file_name);
+//        $fileName = $this->uploadFile($request->image, 'assets/images');
+//        return $fileName;
+//    }
+//}

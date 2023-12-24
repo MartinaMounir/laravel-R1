@@ -68,8 +68,8 @@ class CarController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {        $categories = Category::select('id', 'categoryName')->get();
-
+    {
+        $categories = Category::select('id', 'categoryName')->get();
         $car = Car::findOrFail($id);
         return view('updatecar', compact('car','categories'));
     }
@@ -87,7 +87,6 @@ class CarController extends Controller
             'description' => 'required|max:100|string',
             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
             'category_id' => 'required', 'int', 'exists:categories,id',
-
         ], $messages);
         $data['published'] = isset($data['published']) ? 1 : 0;
         if ($request->hasFile('image')) {
