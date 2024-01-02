@@ -82,8 +82,8 @@ Route::post('receive', function () {
 //    return view('addcar');
 //});
 Route::prefix('/')->as('cars.')->middleware(['auth', 'Admin'])->group(function () {
-    Route::get('addcars',[CarController::class,'create'])->name('addcars');
-    Route::post('cardata',[CarController::class,'store'])->name('cardata');
+//    Route::get('addcars',[CarController::class,'create'])->name('addcars');
+//    Route::post('cardata',[CarController::class,'store'])->name('cardata');
     Route::get('car',[CarController::class,'index']);
     Route::get('editcar/{id}',[CarController::class,'edit'])->name('editcar');
     Route::put('updatecar/{id}',[CarController::class,'update'])->name('updatecar');
@@ -133,3 +133,13 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes(['verify'=>true]);
+// Route::get('contactMail', function () {
+//    return view('contactMail');
+//});
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+    Route::get('addcars',[CarController::class,'create'])->name('addcars');
+    Route::post('cardata',[CarController::class,'store'])->name('cardata');});

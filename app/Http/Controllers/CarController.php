@@ -131,9 +131,10 @@ class CarController extends Controller
     private function messages()
     {
         return [
-            'title.required' => 'Title is required',
-            'description.required' => 'should be text',
-            'price.required' => 'price is required',
+            'title.required'=> __('messages.titleRequired'),
+            'description.required'=> __('messages.descriptionRequired'),
+            'price.required'=> __('messages.priceRequired'),
+            'image.required'=> __('messages.imageRequired'),
         ];
     }
 
