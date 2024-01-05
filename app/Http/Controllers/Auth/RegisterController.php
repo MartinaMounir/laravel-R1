@@ -72,6 +72,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'mobile' => $data['mobile'],
             'type' => $data['type'],
+            'expired'=>0,
 
         ]);
     }

@@ -58,6 +58,12 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
+            'dump' => [
+                'use_single_transaction',
+                'dump_binary_path' =>'C:\xampp\mysql\bin',//That's the location of mysqldump in my PC
+                'timeout' => 5,
+                'dump_command_timeout' => 60,
+            ],
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
